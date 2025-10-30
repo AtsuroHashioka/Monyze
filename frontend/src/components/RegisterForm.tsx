@@ -3,7 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import styles from "./RegisterForm.module.css";
+
 /**
+ * @file RegisterForm.tsx
  * 新規登録フォームコンポーネント
  */
 export default function RegisterForm() {
@@ -45,14 +48,14 @@ export default function RegisterForm() {
       // レスポンスが成功（2xxステータス）でなければ、エラーとして処理します。
       if (!res.ok) {
         const data = await res.json();
-        setError(data.message || "登録に失敗しました。");
+        setError(data.message || "Registration failed.");
         return;
       }
 
       // 登録が成功したら、ログインページにリダイレクトします。
       router.push("/auth/signin");
     } catch (err) {
-      setError("予期せぬエラーが発生しました。");
+      setError("Unexpected error occurred.");
       console.error(err);
     } finally {
       setIsSubmitting(false); // 送信完了（成功・失敗問わず）で状態を解除
@@ -60,23 +63,37 @@ export default function RegisterForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      {error && <p className={styles.error}>{error}</p>}
       <div>
-        <label htmlFor="name">名前</label>
-        <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+        <label htmlFor="name" className={styles.label}>
+          Name
+        </label>
+        <div className={styles.inputContainer}>
+          <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} required className={styles.input}/>
+        </div>
       </div>
       <div>
-        <label htmlFor="email">メールアドレス</label>
-        <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <label htmlFor="email" className={styles.label}>
+          Email
+        </label>
+        <div className={styles.inputContainer}>
+          <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className={styles.input}/>
+        </div>
       </div>
       <div>
-        <label htmlFor="password">パスワード</label>
-        <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <label htmlFor="password" className={styles.label}>
+          Password
+        </label>
+        <div className={styles.inputContainer}>
+          <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className={styles.input}/>
+        </div>
       </div>
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "登録中..." : "登録"}
-      </button>
+      <div>
+        <button type="submit" disabled={isSubmitting} className={styles.button}>
+          {isSubmitting ? "Submitting..." : "Register"}
+        </button>
+      </div>
     </form>
   );
 }

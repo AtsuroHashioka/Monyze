@@ -1,0 +1,84 @@
+/* frontend/src/components/LoginForm.module.css */
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; /* 20px */
+    width: 100%; /* Use 100% to be responsive within the container */
+    max-width: 22rem; /* 352px - Adjust this value to make the form narrower or wider */
+    margin: 0 auto;
+    padding: 2.5rem; /* 40px */
+    background-color: #ffffff;
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.error {
+  background-color: #fee2e2; /* 薄い赤 (red-100) */
+  border: 1px solid #f87171; /* 赤 (red-400) */
+  color: #b91c1c; /* 濃い赤 (red-700) */
+  padding: 0.75rem 1rem; /* px-4 py-3 */
+  border-radius: 0.5rem; /* 8px */
+  position: relative;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #555555; /* 純粋なグレー */
+  margin-bottom: 0.5rem; /* 8px */
+}
+
+.inputContainer {
+  /* This can be removed if the label has margin-bottom */
+}
+
+.input {
+  display: block;
+  width: 90%; /* 幅を90%に設定 */
+  padding: 0.5rem 0.75rem; /* px-3 py-2 */
+  margin: 0 auto; /* 上下0, 左右autoで中央配置 */
+  border: 1px solid #cccccc; /* 純粋なグレー */
+  border-radius: 0.5rem; /* 8px */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+  font-size: 0.875rem; /* sm:text-sm */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #4f46e5; /* indigo-600 */
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem; /* py-2 px-4 - Reduced vertical padding */
+  border: 1px solid transparent; /* border border-transparent */
+  border-radius: 0.5rem; /* 8px */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #fff; /* text-white */
+  background-color: #4f46e5; /* bg-indigo-600 */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #4338ca; /* hover:bg-indigo-700 */
+}
+
+.button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.button:disabled {
+  opacity: 0.5; /* disabled:opacity-50 */
+  cursor: not-allowed;
+}
