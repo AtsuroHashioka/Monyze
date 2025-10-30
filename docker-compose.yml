@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    env_file: ./.env # .envファイルのパスを指定
+    image: postgres:15-alpine # PostgreSQLのバージョン15を使用
+    restart: always
+    environment:
+      POSTGRES_DB: monyze # データベース名
+      POSTGRES_USER: ${POSTGRES_USER} # .envファイルから読み込む
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # .envファイルから読み込む
+    ports:
+      - "5432:5432" # ホストの5432ポートをコンテナの5432ポートにマッピング
+    volumes:
+      - db_data:/var/lib/postgresql/data # データを永続化するためのボリューム
+
+volumes:
+  db_data: # データベースのデータを保存するボリューム

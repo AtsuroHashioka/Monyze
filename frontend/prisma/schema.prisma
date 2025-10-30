@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- ユーザーモデル ---
+// アプリケーションのユーザー情報を管理します
+model User {
+  id            String    @id @default(cuid()) // ユーザーの一意なID
+  name          String?                        // ユーザー名 (任意)
+  email         String    @unique                // メールアドレス (必須、重複不可)
+  emailVerified DateTime?                      // メールアドレス確認日時
+  password      String                         // ハッシュ化されたパスワード
+  image         String?                        // プロフィール画像URL (任意)
+  createdAt     DateTime  @default(now())        // 作成日時
+  updatedAt     DateTime  @updatedAt             // 更新日時
+
+  // リレーション: 1人のユーザーは複数の収支記録を持つ
+  transactions Transaction[]
+}
+
+// --- 収支記録モデル ---
+// 日々の収入や支出の記録を管理します
+model Transaction {
+  id          String    @id @default(cuid()) // 記録の一意なID
+  amount      Int                          // 金額
+  type        String                       // "INCOME" (収入) or "EXPENSE" (支出)
+  date        DateTime                     // 記録日
+  category    String                       // カテゴリ (例: "食費", "給与")
+  description String?                      // メモ (任意)
+  createdAt   DateTime  @default(now())      // 作成日時
+  updatedAt   DateTime  @updatedAt           // 更新日時
+
+  // リレーション: この記録がどのユーザーのものかを示す
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, date]) // ユーザーIDと日付で検索しやすくするためのインデックス
+}
