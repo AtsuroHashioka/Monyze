@@ -3,3 +3,6 @@
 
 # Node.js
 /frontend/node_modules
+
+# Gemini Code Assist instructions
+GEMINI.md
