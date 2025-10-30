@@ -51,7 +51,6 @@ const handler = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id;
-        // emailは元々Session型に含まれているので、上書きは必須ではありませんが、念のためtokenの最新情報で更新します。
         session.user.email = token.email;
       }
       return session;
