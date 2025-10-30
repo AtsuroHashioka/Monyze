@@ -2,8 +2,14 @@
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/react": "19.2.2",
-    "prisma": "^6.17.1",
+    "prisma": "^6.18.0",
     "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@prisma/client": "^6.17.1",
